@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/brown">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tennis_court"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/tenniscourt2"/>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/shoesecond"
+        android:layout_marginBottom="10dp"
+        android:focusable="true"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:src="@drawable/shot"
+        android:rotation="180"
+        android:layout_gravity="center_horizontal|bottom" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/shoefirst"
+        android:layout_marginTop="15dp"
+        android:adjustViewBounds="true"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/transparent"
+        android:src="@drawable/shot"
+         />
+
+
+
+    <Button
+        android:id="@+id/add_new"
+        android:text="correct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:onClick="NoteServingPosition"/>
+
+
+</FrameLayout>

@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.ServeSpeed.HelpVideo" >
+    <item android:id="@+id/help"
+        android:title="help"
+        android:showAsAction="never" />
+</menu>

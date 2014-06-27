@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/brown">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tennis_court2"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/tenniscourt2"/>
+
+
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:id="@+id/ball"
+        android:src="@drawable/transparent"/>
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/selectBallCoordinates"
+    android:text="Calculate"
+    android:onClick="CalculateSpeed"
+    />
+
+    <SeekBar
+        android:id="@+id/height_slider"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:max="70"
+        android:progress="44"
+        android:secondaryProgress="0"
+        android:progressDrawable="@drawable/seekbar_progress"
+        android:thumb="@drawable/seek_thumb"
+        android:layout_marginBottom="15dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="200cm"
+        android:id="@+id/textViewHeightMax"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="30dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="130cm"
+        android:id="@+id/textViewHeightMin"
+        android:layout_gravity="left|bottom"
+        android:layout_marginBottom="30dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="174 cm"
+        android:id="@+id/textViewHeightPlayer"
+        android:layout_gravity="center_horizontal|bottom" />
+
+</FrameLayout>

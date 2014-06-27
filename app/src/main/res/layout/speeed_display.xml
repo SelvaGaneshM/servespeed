@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fadePopup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#AA000000">
+
+    <FrameLayout
+        android:id="@+id/shareSnapshot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp">
+
+        <ImageView
+            android:id="@+id/snapshot"
+            android:layout_width="200dp"
+            android:layout_height="350dp"
+            android:src="@drawable/tenniscourt"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ServeSpeed"
+            android:layout_marginLeft="20dp"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="90"
+            android:layout_gravity="right"
+            android:layout_marginRight="20dp"
+            android:textSize="24sp"
+            android:layout_marginTop="20dp"/>
+        <Button
+            android:id="@+id/share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Share"
+            android:textColor="@color/white_start"
+            android:onClick="share"
+            android:background="@drawable/btn_new_style"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="70dp"
+            android:layout_marginBottom="20dp"/>
+    </FrameLayout>
+    <RelativeLayout
+        android:id="@+id/rest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/shareSnapshot"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginTop="40dp"
+            android:text="SERVE SPEED"
+            />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_below="@id/appName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:text="XX"/>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/cont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shareSnapshot"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="continueGame"
+        android:background="@drawable/btn_new_style"
+        android:text="Touch to Continue"
+        android:textColor="@color/white_start"/>
+</RelativeLayout>
