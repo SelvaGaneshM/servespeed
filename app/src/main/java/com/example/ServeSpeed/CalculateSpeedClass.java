@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import android.os.CountDownTimer;
+import android.widget.Toast;
+
 import java.net.URI;
 
 /**
@@ -35,17 +38,24 @@ public class CalculateSpeedClass extends Activity{
     Button shareButton;
     Button cont;
     int speeddisplay;
+    Button unitSwitchButton;
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.speeed_display);
-        tv = (TextView)findViewById(R.id.textView);
+        setContentView(R.layout.speeed_display2);
+
+        //tv = (TextView)findViewById(R.id.textView);
         image = (ImageView)findViewById(R.id.snapshot);
         shareButton = (Button)findViewById(R.id.share);
         cont = (Button)findViewById(R.id.cont);
+        unitSwitchButton=(Button)findViewById(R.id.SwitchUnit);
         MainActivity m1= new MainActivity();
         selectVideo=m1.ReturnVideoUri();
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        Typeface myTypeface = Typeface.createFromAsset(this.getAssets(),
+                "digital-7 (italic).ttf");
+        tv= (TextView) findViewById(R.id.textView);
+        tv.setTypeface(myTypeface);
         try
         {
 
@@ -76,7 +86,35 @@ public class CalculateSpeedClass extends Activity{
         MyCount counter= new MyCount(speeddisplay*20,20);
         counter.start();
     }
+    public void SwitchUnit(View view)
+    {
+        if(unitSwitchButton.getText().equals("MPH"))
+        {
+            speeddisplay=ConvertKmToMiles(speeddisplay);
+            unitSwitchButton.setText("KMPH");
+            MyCount counter= new MyCount(speeddisplay*20,20);
+            counter.start();
 
+        }
+        else
+        {
+            speeddisplay=ConvertMilesToKm(speeddisplay);
+            unitSwitchButton.setText("MPH");
+            MyCount counter= new MyCount(speeddisplay*20,20);
+            counter.start();
+
+        }
+    }
+    private int ConvertMilesToKm(int speed)
+    {
+        double speedConverted=speed * 1.60934;
+        return (int)speedConverted;
+    }
+    private int ConvertKmToMiles(int speed)
+    {
+        double speedConverted=speed * 0.621371;
+        return (int)speedConverted;
+    }
     public class MyCount extends CountDownTimer
     {
         public MyCount(long millisInFuture, long countDownInterval) {
@@ -85,12 +123,26 @@ public class CalculateSpeedClass extends Activity{
 
         @Override
         public void onFinish() {
-            tv.setText("Speed " + speeddisplay  + "km/hr");
+            if(unitSwitchButton.getText().equals("MPH"))
+            {
+                tv.setText("  Speed  " +"\n" + speeddisplay  + " Km/hr");
+            }
+            else
+            {
+                tv.setText("   Speed   " + "\n"+ speeddisplay  + " M/hr");
+            }
         }
 
         @Override
         public void onTick(long millisUntilFinished) {
-            tv.setText("Speed " + (speeddisplay*20- millisUntilFinished )/ 20 + "km/hr");
+            if(unitSwitchButton.getText().equals("MPH"))
+            {
+                tv.setText("  Speed  " + (speeddisplay*20- millisUntilFinished )/ 20 + "Km/hr");
+            }
+            else
+            {
+                tv.setText("   Speed   " + (speeddisplay*20- millisUntilFinished )/ 20 + "M/Hr");
+            }
         }
     }
     private int CalcSpeed()

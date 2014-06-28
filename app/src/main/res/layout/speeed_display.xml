@@ -13,25 +13,12 @@
 
         <ImageView
             android:id="@+id/snapshot"
-            android:layout_width="200dp"
-            android:layout_height="350dp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:src="@drawable/tenniscourt"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ServeSpeed"
-            android:layout_marginLeft="20dp"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="90"
-            android:layout_gravity="right"
-            android:layout_marginRight="20dp"
-            android:textSize="24sp"
-            android:layout_marginTop="20dp"/>
+
+
         <Button
             android:id="@+id/share"
             android:layout_width="wrap_content"
@@ -65,9 +52,13 @@
             android:layout_below="@id/appName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="40sp"
             android:layout_marginTop="20dp"
-            android:text="XX"/>
+            android:text="XX"
+            android:shadowColor="#76c40e"
+            android:background="#141414"
+            android:capitalize="characters"
+            android:textColor="#18921f" />
     </RelativeLayout>
 
     <Button

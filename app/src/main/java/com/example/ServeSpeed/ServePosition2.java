@@ -287,7 +287,7 @@ public class ServePosition2 extends Activity {
                         ballX=convertPixelsToDp(ballleft,getApplicationContext())+(float)12.5;
                         ballY=convertPixelsToDp(balltop,getApplicationContext())+(float)12.5;
 
-                        Toast.makeText(getApplicationContext(), "x-" +ballX  + "y-" + ballY, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "x-" +ballX  + "y-" + ballY, Toast.LENGTH_SHORT).show();
                     default:
                         break;
                 }
@@ -297,6 +297,7 @@ public class ServePosition2 extends Activity {
     }
     public void CalculateSpeed(View view)
     {
+        Toast.makeText(this, "Wait While We Calculate", Toast.LENGTH_LONG);
         Intent i= new Intent(this,CalculateSpeedClass.class);
         startActivity(i);
 
