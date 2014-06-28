@@ -190,7 +190,7 @@ public class PlayVideo extends Activity implements SurfaceHolder.Callback,MediaP
             mediaPlayer.start();
             SystemClock.sleep(10);
             mediaPlayer.pause();
-            boolean boo = myHandler.postDelayed(this, 100);
+            boolean boo = myHandler.postDelayed(this, 300);
             Log.d(TAG, "start and bool :" + boo);
         }
     };
