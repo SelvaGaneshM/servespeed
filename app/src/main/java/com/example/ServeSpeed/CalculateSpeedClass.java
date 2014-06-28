@@ -38,6 +38,7 @@ public class CalculateSpeedClass extends Activity{
     Button shareButton;
     Button cont;
     int speeddisplay;
+    int speedDisplayMph;
     Button unitSwitchButton;
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -81,6 +82,7 @@ public class CalculateSpeedClass extends Activity{
         Bitmap bm = BitmapFactory.decodeFile(getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES) + File.separator + "snapshot.jpg");
         image.setImageBitmap(bm);
         speeddisplay=CalcSpeed();
+        speedDisplayMph=ConvertKmToMiles(speeddisplay);
         SystemClock.sleep(500);
 
         MyCount counter= new MyCount(speeddisplay*20,20);
@@ -90,15 +92,13 @@ public class CalculateSpeedClass extends Activity{
     {
         if(unitSwitchButton.getText().equals("MPH"))
         {
-            speeddisplay=ConvertKmToMiles(speeddisplay);
             unitSwitchButton.setText("KMPH");
-            MyCount counter= new MyCount(speeddisplay*20,20);
+            MyCount counter= new MyCount(speedDisplayMph*20,20);
             counter.start();
 
         }
         else
         {
-            speeddisplay=ConvertMilesToKm(speeddisplay);
             unitSwitchButton.setText("MPH");
             MyCount counter= new MyCount(speeddisplay*20,20);
             counter.start();
@@ -129,7 +129,7 @@ public class CalculateSpeedClass extends Activity{
             }
             else
             {
-                tv.setText("   Speed   " + "\n"+ speeddisplay  + " M/hr");
+                tv.setText("   Speed   " + "\n"+ speedDisplayMph  + " M/hr");
             }
         }
 
@@ -137,11 +137,11 @@ public class CalculateSpeedClass extends Activity{
         public void onTick(long millisUntilFinished) {
             if(unitSwitchButton.getText().equals("MPH"))
             {
-                tv.setText("  Speed  " + (speeddisplay*20- millisUntilFinished )/ 20 + "Km/hr");
+                tv.setText("  Speed  " +"\n"+ (speeddisplay*20- millisUntilFinished )/ 20 + "Km/hr");
             }
             else
             {
-                tv.setText("   Speed   " + (speeddisplay*20- millisUntilFinished )/ 20 + "M/Hr");
+                tv.setText("   Speed   " +"\n" + (speedDisplayMph*20- millisUntilFinished )/ 20 + "M/Hr");
             }
         }
     }
