@@ -4,8 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaMetadataRetriever;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -15,6 +22,10 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 
 /**
  * Created by lenovo on 5/24/14.
@@ -40,8 +51,9 @@ public class ServePosition2 extends Activity {
     public static float ballY;
     boolean isBallPositionSelected;
     DisplayMetrics dm;
-
+    Uri selectVideo;
     Animation toZoomIn;
+    MediaMetadataRetriever retriever;
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -56,7 +68,10 @@ public class ServePosition2 extends Activity {
         y_org=dm.heightPixels;
         Animation AnimBlink=AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
         ball.startAnimation(AnimBlink);
-
+        retriever = new MediaMetadataRetriever();
+        MainActivity m1= new MainActivity();
+        selectVideo=m1.ReturnVideoUri();
+        new CaptureSnapshot().execute(selectVideo);
         /*
         FrameLayout.LayoutParams mParams1 = (FrameLayout.LayoutParams) ball.getLayoutParams();
         mParams1.leftMargin=(int) x_org - (int)x_org/2 - (int)convertDpToPixel(25,getApplicationContext())/2;
@@ -352,7 +367,40 @@ public class ServePosition2 extends Activity {
     }
 
 
-}
+class CaptureSnapshot extends AsyncTask<Uri, Integer, Integer>
+    {
+        @Override
+        protected Integer doInBackground(Uri... params) {
+            try
+            {
+                retriever.setDataSource(getApplicationContext(),selectVideo);
+                Bitmap bitmap = retriever.getFrameAtTime(PlayVideo.racquetContactTime*1000, MediaMetadataRetriever.OPTION_CLOSEST);
+                if(bitmap==null)
+                {
+                    bitmap = retriever.getFrameAtTime(-1);
+                }
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+
+                File f = new File(getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES) + File.separator + "snapshot.jpg");
+                f.createNewFile();
+                FileOutputStream fo = new FileOutputStream(f);
+                fo.write(bytes.toByteArray());
+                fo.close();
+            }
+            catch (Exception e)
+            {
+                Log.d("servespeed", "exception :" + e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+
+        }
+    }}
 /*
     @Override
     public boolean onTouchEvent(MotionEvent event) {

@@ -37,7 +37,6 @@ public class CalculateSpeedClass extends Activity{
 
     TextView tv;
     ImageView image;
-    Uri selectVideo;
     Button shareButton;
     Button cont;
     int speeddisplay;
@@ -54,18 +53,19 @@ public class CalculateSpeedClass extends Activity{
         shareButton = (Button)findViewById(R.id.share);
         cont = (Button)findViewById(R.id.cont);
         unitSwitchButton=(Button)findViewById(R.id.SwitchUnit);
-        MainActivity m1= new MainActivity();
-        selectVideo=m1.ReturnVideoUri();
         retriever = new MediaMetadataRetriever();
         Typeface myTypeface = Typeface.createFromAsset(this.getAssets(),
                 "digital-7 (italic).ttf");
         tv= (TextView) findViewById(R.id.textView);
         tv.setTypeface(myTypeface);
 
+        Bitmap bm = BitmapFactory.decodeFile(getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES) + File.separator + "snapshot.jpg");
+        image.setImageBitmap(bm);
+        toZoomIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
+        image.startAnimation(toZoomIn);
         speeddisplay=CalcSpeed();
         speedDisplayMph=ConvertKmToMiles(speeddisplay);
 
-        new CaptureSnapshot().execute(selectVideo);
         MyCount counter= new MyCount(speeddisplay*20,20);
         counter.start();
     }
@@ -211,41 +211,5 @@ public class CalculateSpeedClass extends Activity{
         startActivity(intent);
     }
 
-    class CaptureSnapshot extends AsyncTask<Uri, Integer, Integer>
-    {
-        @Override
-        protected Integer doInBackground(Uri... params) {
-            try
-            {
-                retriever.setDataSource(getApplicationContext(),selectVideo);
-                Bitmap bitmap = retriever.getFrameAtTime(PlayVideo.racquetContactTime*1000,MediaMetadataRetriever.OPTION_CLOSEST);
-                if(bitmap==null)
-                {
-                    bitmap = retriever.getFrameAtTime(-1);
-                }
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
 
-                File f = new File(getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES) + File.separator + "snapshot.jpg");
-                f.createNewFile();
-                FileOutputStream fo = new FileOutputStream(f);
-                fo.write(bytes.toByteArray());
-                fo.close();
-            }
-            catch (Exception e)
-            {
-                Log.d("servespeed", "exception :" + e);
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            Bitmap bm = BitmapFactory.decodeFile(getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES) + File.separator + "snapshot.jpg");
-            image.setImageBitmap(bm);
-            toZoomIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
-            image.startAnimation(toZoomIn);
-        }
-    }
 }

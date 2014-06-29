@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        //getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -149,5 +149,11 @@ public class MainActivity extends Activity {
             TimeStampuri=Uri.fromFile(photofile);
         }
         return TimeStampuri;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        PlayVideo.RacquetTouchOnce=0;
     }
 }
