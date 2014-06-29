@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import java.io.File;
@@ -47,6 +48,23 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void ChooseVideo(View view)
+    {
+        final Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("video/*");
+        startActivityForResult(galleryIntent, RESULT_LOAD_VIDEO);
+    }
+
+    public void CaptureVideo(View view)
+    {
+        selectedVideo = GenerateTimeStampUri();
+        if( selectedVideo!=null )
+        {
+            Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT,selectedVideo);
+            startActivityForResult(intent,1000);
+        }
+    }
     public void onChooseCalculate(MenuItem item)
     {
         final Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
