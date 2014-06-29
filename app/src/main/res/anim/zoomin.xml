@@ -6,12 +6,10 @@
 
     <scale xmlns:android="http://schemas.android.com/apk/res/android"
         android:fromXScale="1"
-        android:toXScale="4"
+        android:toXScale="1"
         android:fromYScale="1"
-        android:toYScale="4"
-        android:pivotX="70%"
-        android:pivotY="0%"
-        android:duration="1000"
+        android:toYScale="1.4"
+        android:duration="0"
         >
 
     </scale>

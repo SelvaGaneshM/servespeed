@@ -12,6 +12,8 @@ import android.os.Environment;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,6 +42,7 @@ public class CalculateSpeedClass extends Activity{
     int speeddisplay;
     int speedDisplayMph;
     Button unitSwitchButton;
+    Animation toZoomIn;
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -81,6 +84,8 @@ public class CalculateSpeedClass extends Activity{
         }
         Bitmap bm = BitmapFactory.decodeFile(getApplicationContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES) + File.separator + "snapshot.jpg");
         image.setImageBitmap(bm);
+        toZoomIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
+        image.startAnimation(toZoomIn);
         speeddisplay=CalcSpeed();
         speedDisplayMph=ConvertKmToMiles(speeddisplay);
         SystemClock.sleep(500);

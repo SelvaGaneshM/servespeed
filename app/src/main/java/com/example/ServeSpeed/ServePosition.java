@@ -64,7 +64,7 @@ public class ServePosition extends Activity {
         AnimBlink=AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
         shoe.startAnimation(AnimBlink);
         shoe2.startAnimation(AnimBlink);
-        toZoomIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
+
         //tennisCourt.setAnimation(toZoomIn);
 
         SeekBar HeightBar;
