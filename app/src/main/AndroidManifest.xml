@@ -18,16 +18,16 @@
         </activity>
         <activity
             android:name=".PlayVideo"
-            android:label="Video Player2" />
+            android:label="RacquetContact|BallBounce Time" />
         <activity
             android:name=".ServePosition"
-            android:label="serveposition" />
+            android:label="Select Player Position/Height" />
         <activity
             android:name=".ServePosition2"
-            android:label="serveposition2" />
+            android:label="Select Ball Bounce Position" />
         <activity
             android:name=".CalculateSpeedClass"
-            android:label="calculation" />
+            android:label="ServeSpeed" />
         <activity
             android:name=".HelpVideo"
             android:theme="@style/NewTranslucent"

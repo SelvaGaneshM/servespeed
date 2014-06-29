@@ -13,6 +13,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -45,6 +47,8 @@ public class ServePosition extends Activity {
     float screenwidth1;
     float screenheight1;
     Animation AnimBlink;
+    boolean isServePositionSelected;
+    public static int HeightPlayerFinal=170;
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -52,6 +56,7 @@ public class ServePosition extends Activity {
         shoe = (ImageView)findViewById(R.id.shoefirst);
         shoe2=(ImageView)findViewById(R.id.shoesecond);
         tennisCourt = (ImageView)findViewById(R.id.tennis_court);
+        isServePositionSelected=false;
         dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         screenwidth1=dm.widthPixels;
@@ -61,6 +66,30 @@ public class ServePosition extends Activity {
         shoe2.startAnimation(AnimBlink);
         toZoomIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
         //tennisCourt.setAnimation(toZoomIn);
+
+        SeekBar HeightBar;
+        HeightBar=(SeekBar)findViewById(R.id.height_slider);
+        HeightBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int height, boolean b) {
+
+                TextView playerHeight=(TextView)findViewById(R.id.textViewHeightPlayer);
+                playerHeight.setText(130+height +"\n" + "cm");
+                HeightPlayerFinal=130+height;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+
         shoe.setOnTouchListener(new View.OnTouchListener() {
 
         public boolean onTouch(View v, MotionEvent event) {
@@ -68,6 +97,7 @@ public class ServePosition extends Activity {
             int eid = event.getAction();
             shoe.clearAnimation();
             shoe2.clearAnimation();
+            isServePositionSelected=true;
             switch (eid) {
                 case MotionEvent.ACTION_MOVE:
 
@@ -142,6 +172,7 @@ public class ServePosition extends Activity {
                 int eid = event.getAction();
                 shoe2.clearAnimation();
                 shoe.clearAnimation();
+                isServePositionSelected=true;
                 switch (eid) {
                     case MotionEvent.ACTION_MOVE:
                         FrameLayout.LayoutParams mParams = (FrameLayout.LayoutParams) shoe2.getLayoutParams();
@@ -228,9 +259,16 @@ public class ServePosition extends Activity {
 */
     public void NoteServingPosition(View view)
     {
-        PlayVideo p1= new PlayVideo();
-        Intent intent= new Intent(this,PlayVideo.class);
-        startActivity(intent);
+        if(isServePositionSelected)
+        {
+            PlayVideo p1= new PlayVideo();
+            Intent intent= new Intent(this,PlayVideo.class);
+            startActivity(intent);
+        }
+        else
+        {
+            Toast.makeText(this,"Select Server Position",Toast.LENGTH_SHORT).show();
+        }
     }
     public void ZoomInShoe(View view)
     {
@@ -254,41 +292,5 @@ public class ServePosition extends Activity {
 
 
 }
-/*
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        super.onTouchEvent(event);
-        switch(event.getAction())
-        {
-            case MotionEvent.ACTION_DOWN :
-            {
-                FrameLayout.LayoutParams mParams = (FrameLayout.LayoutParams) imageView.getLayoutParams();
-                parms = (LayoutParams) myView.getLayoutParams();
-                par = (LinearLayout.LayoutParams) getWindow().findViewById(Window.ID_ANDROID_CONTENT).getLayoutParams();
-                dx = event.getRawX() - parms.leftMargin;
-                dy = event.getRawY() - parms.topMargin;
-            }
-            break;
-            case MotionEvent.ACTION_MOVE :
-            {
-                x = event.getRawX();
-                y = event.getRawY();
-                parms.leftMargin = (int) (x-dx);
-                parms.topMargin = (int) (y - dy);
-                myView.setLayoutParams(parms);
-            }
-            break;
-            case MotionEvent.ACTION_UP :
-            {
 
-            }
-            break;
-        }
-
-
-        return true;
-
-    }
-
-*/
 

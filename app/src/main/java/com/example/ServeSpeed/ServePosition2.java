@@ -38,7 +38,7 @@ public class ServePosition2 extends Activity {
     public static float scaleInPixels;
     public static float ballX;
     public static float ballY;
-    public static int HeightPlayerFinal=174;
+    boolean isBallPositionSelected;
     DisplayMetrics dm;
 
     Animation toZoomIn;
@@ -48,7 +48,7 @@ public class ServePosition2 extends Activity {
         setContentView(R.layout.serve_position2);
         ball = (ImageView)findViewById(R.id.ball);
         tennisCourt = (ImageView)findViewById(R.id.tennis_court2);
-
+        isBallPositionSelected=false;
         dm = new DisplayMetrics();
 
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -56,27 +56,7 @@ public class ServePosition2 extends Activity {
         y_org=dm.heightPixels;
         Animation AnimBlink=AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
         ball.startAnimation(AnimBlink);
-        SeekBar HeightBar;
-        HeightBar=(SeekBar)findViewById(R.id.height_slider);
-        HeightBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int height, boolean b) {
 
-                TextView playerHeight=(TextView)findViewById(R.id.textViewHeightPlayer);
-                playerHeight.setText(130+height + "cm");
-                HeightPlayerFinal=130+height;
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
         /*
         FrameLayout.LayoutParams mParams1 = (FrameLayout.LayoutParams) ball.getLayoutParams();
         mParams1.leftMargin=(int) x_org - (int)x_org/2 - (int)convertDpToPixel(25,getApplicationContext())/2;
@@ -92,6 +72,7 @@ public class ServePosition2 extends Activity {
                 int eid = event.getAction();
 
                 ball.clearAnimation();
+                isBallPositionSelected=true;
                 switch (eid) {
                     case MotionEvent.ACTION_MOVE:
                         if(ServePosition.servePositionX>=180 && ServePosition.servePositionY==50)
@@ -297,11 +278,22 @@ public class ServePosition2 extends Activity {
     }
     public void CalculateSpeed(View view)
     {
-        Toast.makeText(this, "Wait While We Calculate", Toast.LENGTH_LONG);
-        Intent i= new Intent(this,CalculateSpeedClass.class);
-        startActivity(i);
+
+        if(isBallPositionSelected)
+        {
+            Toast.makeText(this, "Wait.. Calculating", Toast.LENGTH_SHORT).show();
+            Intent i= new Intent(this,CalculateSpeedClass.class);
+            startActivity(i);
+
+        }
+        else
+        {
+            Toast.makeText(this, "Select Ball bounce Position", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
+
     /*
     @Override
     public boolean onTouchEvent(MotionEvent event) {

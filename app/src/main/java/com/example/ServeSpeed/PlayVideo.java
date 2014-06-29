@@ -64,6 +64,7 @@ public class PlayVideo extends Activity implements SurfaceHolder.Callback,MediaP
     float screenwidth1;
     float screenheight1;
     DisplayMetrics dm;
+    boolean isSlowMotionPlaying;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +90,7 @@ public class PlayVideo extends Activity implements SurfaceHolder.Callback,MediaP
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         screenwidth1=dm.widthPixels;
         screenheight1=dm.heightPixels;
+        isSlowMotionPlaying=false;
         if(!dontShowAgain())
         {
             Intent intent = new Intent(this,HelpVideo.class);
@@ -104,6 +106,7 @@ public class PlayVideo extends Activity implements SurfaceHolder.Callback,MediaP
     }
 
     public void RacquetContactTime(View view) throws InterruptedException {
+        isSlowMotionPlaying=false;
         if(RacquetTouchOnce==0)
         {
             racquetContactTime = mediaPlayer.getCurrentPosition();
@@ -117,10 +120,17 @@ public class PlayVideo extends Activity implements SurfaceHolder.Callback,MediaP
         else
         {
             ballBounceTime = mediaPlayer.getCurrentPosition();
-            Toast.makeText(this,"The time is "+ballBounceTime,Toast.LENGTH_SHORT).show();
-            if (mediaPlayer.isPlaying())
-                mediaPlayer.pause();
-            CallBounceCoordinates();
+            if(ballBounceTime>racquetContactTime)
+            {
+
+                if (mediaPlayer.isPlaying())
+                    mediaPlayer.pause();
+                CallBounceCoordinates();
+            }
+            else
+            {
+                Toast.makeText(this,"Ball Bounce Time <RacquetContact Time",Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -139,6 +149,7 @@ public class PlayVideo extends Activity implements SurfaceHolder.Callback,MediaP
     public void play(View view)
     {
         play_pause.setVisibility(View.GONE);
+        isSlowMotionPlaying=false;
         myHandler.removeCallbacks(startSlow);
         synchronized (this) {
             if (mediaPlayer.isPlaying())
@@ -149,12 +160,15 @@ public class PlayVideo extends Activity implements SurfaceHolder.Callback,MediaP
 
     public void playslowmotion(View view)
     {
+        isSlowMotionPlaying=true;
         myHandler.postDelayed(startSlow, 0);
+
     }
 
     public void forward(View view)
     {
         play_pause.setVisibility(View.GONE);
+        isSlowMotionPlaying=false;
         myHandler.removeCallbacks(startSlow);
         if(mediaPlayer.isPlaying())
             mediaPlayer.pause();
@@ -234,6 +248,7 @@ public class PlayVideo extends Activity implements SurfaceHolder.Callback,MediaP
 
     public void pause(View view){
         play_pause.setVisibility(View.VISIBLE);
+        isSlowMotionPlaying=false;
         myHandler.removeCallbacks(startSlow);
         if (!mediaPlayer.isPlaying())
             return;
@@ -292,9 +307,10 @@ public class PlayVideo extends Activity implements SurfaceHolder.Callback,MediaP
                     if(ServePosition.convertPixelsToDp(getScreenPausePosition,getApplicationContext())<heightofScreen-50)
                     {
                         myHandler.removeCallbacks(startSlow);
-                        if(mediaPlayer.isPlaying()) {
+                        if(mediaPlayer.isPlaying() || isSlowMotionPlaying) {
                             play_pause.setVisibility(View.VISIBLE);
                             mediaPlayer.pause();
+                            isSlowMotionPlaying=false;
                         }
                         else
                         {

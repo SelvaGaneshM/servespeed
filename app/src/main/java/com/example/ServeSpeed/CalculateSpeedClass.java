@@ -172,7 +172,8 @@ public class CalculateSpeedClass extends Activity{
         float distanceXinM=distanceX/scale;
         float distanceYinM=distanceY/scale;
 
-        float height=(float)2.60;
+        float height=ServePosition.HeightPlayerFinal;
+        height=height/100+(float).90;
 
         float time=time2-time1;
 

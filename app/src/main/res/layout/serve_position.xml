@@ -2,7 +2,7 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@drawable/brown">
+    android:background="@drawable/red4">
 
 
     <ImageView
@@ -12,7 +12,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
         android:layout_gravity="center"
-        android:src="@drawable/tenniscourt2"/>
+        android:src="@drawable/tennis_court_blue3"/>
 
     <ImageView
         android:layout_width="40dp"
@@ -46,6 +46,74 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:onClick="NoteServingPosition"/>
+    <SeekBar
+        android:id="@+id/height_slider"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
+        android:rotation="270"
+        android:max="70"
+        android:progress="40"
+        android:secondaryProgress="0"
+        android:progressDrawable="@drawable/seekbar_progress"
+        android:thumb="@drawable/seekbar_thumb3"
+        android:layout_marginRight="-65dp"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="SERVER\nHEIGHT"
+        android:id="@+id/PlayerHeightTitle"
+        android:layout_gravity="right|top"
+        android:layout_marginTop="90dp"
+        android:shadowColor="#76c40e"
+        android:capitalize="characters"
+        android:textColor="#000000"
+        android:textAlignment="center"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="200cm"
+        android:id="@+id/textViewHeightMax"
+        android:layout_gravity="right|top"
+        android:layout_marginTop="140dp"
+        android:layout_marginRight="12dp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="130cm"
+        android:id="@+id/textViewHeightMin"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="140dp"
+        android:layout_marginRight="12dp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:typeface="normal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=" 170\n  cm"
+        android:id="@+id/textViewHeightPlayer"
+        android:layout_gravity="center_vertical|right"
+        android:layout_marginRight="45dp"
+        android:shadowColor="#76c40e"
+        android:capitalize="characters"
+        android:textColor="#000000"
+        android:textAlignment="center"
+        android:textStyle="bold"/>
 
 
 </FrameLayout>
