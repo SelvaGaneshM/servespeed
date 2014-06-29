@@ -53,6 +53,6 @@
         android:background="#141414"
         android:capitalize="characters"
         android:textColor="#18921f"
-        android:textAlignment="center"
+        android:gravity="center"
         android:textStyle="bold" />
 </FrameLayout>

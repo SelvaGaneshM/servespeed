@@ -125,11 +125,11 @@ public class CalculateSpeedClass extends Activity{
         public void onFinish() {
             if(unitSwitchButton.getText().equals("MPH"))
             {
-                tv.setText("  Speed  " +"\n" + speeddisplay  + " Km/hr");
+                tv.setText("SPEED" +"\n" + speeddisplay  + " Km/hr");
             }
             else
             {
-                tv.setText("   Speed   " + "\n"+ speedDisplayMph  + " M/hr");
+                tv.setText("SPEED" + "\n"+ speedDisplayMph  + " M/hr");
             }
         }
 
@@ -137,11 +137,11 @@ public class CalculateSpeedClass extends Activity{
         public void onTick(long millisUntilFinished) {
             if(unitSwitchButton.getText().equals("MPH"))
             {
-                tv.setText("  Speed  " +"\n"+ (speeddisplay*20- millisUntilFinished )/ 20 + "Km/hr");
+                tv.setText("SPEED" +"\n"+ (speeddisplay*20- millisUntilFinished )/ 20 + "Km/hr");
             }
             else
             {
-                tv.setText("   Speed   " +"\n" + (speedDisplayMph*20- millisUntilFinished )/ 20 + "M/Hr");
+                tv.setText("SPEED" +"\n" + (speedDisplayMph*20- millisUntilFinished )/ 20 + "M/Hr");
             }
         }
     }
