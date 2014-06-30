@@ -291,6 +291,11 @@ public class ServePosition extends Activity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        PlayVideo.RacquetTouchOnce=0;
+    }
 }
 
 

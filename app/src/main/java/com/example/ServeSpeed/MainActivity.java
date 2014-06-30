@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,7 @@ import java.util.Date;
 public class MainActivity extends Activity {
 
     final int RESULT_LOAD_VIDEO=1001;
+    final int RESULT_CAPTURE_VIDEO=1000;
     public static Uri selectedVideo;
 
     @Override
@@ -28,7 +30,7 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -38,12 +40,8 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
         switch (id)
         {
-            case R.id.Choose_Calculate:
-                onChooseCalculate(item);
-                break;
-            case R.id.Capture_Calculate:
-                onCaptureCalculate(item);
-                break;
+            case R.id.Exit:
+                System.exit(0);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -62,7 +60,7 @@ public class MainActivity extends Activity {
         {
             Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
             intent.putExtra(MediaStore.EXTRA_OUTPUT,selectedVideo);
-            startActivityForResult(intent,1000);
+            startActivityForResult(intent,RESULT_CAPTURE_VIDEO);
         }
     }
     public void onChooseCalculate(MenuItem item)
@@ -100,7 +98,7 @@ public class MainActivity extends Activity {
                     selectedVideo = videoReturnedIntent.getData();
                     CallPlayVideoAct();
                 }
-            case 1000:
+            case RESULT_CAPTURE_VIDEO:
                 if (resultCode == RESULT_OK)
                 {
                     CallPlayVideoAct();

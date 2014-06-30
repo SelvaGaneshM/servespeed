@@ -2,15 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.ServeSpeed.MainActivity" >
 
-    <item
-        android:id="@+id/Choose_Calculate"
-        android:title="Choose Video"/>
-    <item
-        android:id="@+id/Capture_Calculate"
-        android:title="Capture Video"
-        />
     <item android:id="@+id/Exit"
         android:title="@string/Exit"
         android:orderInCategory="100"
         android:showAsAction="never" />
+
 </menu>

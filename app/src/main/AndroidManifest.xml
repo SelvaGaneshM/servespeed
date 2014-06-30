@@ -19,7 +19,7 @@
         </activity>
         <activity
             android:name=".PlayVideo"
-            android:label="RacquetContact|BallBounce Time" />
+            android:label="RacquetContactTime" />
         <activity
             android:name=".ServePosition"
             android:label="Select Player Position/Height" />

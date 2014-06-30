@@ -264,6 +264,8 @@ public class PlayVideo extends Activity implements SurfaceHolder.Callback,MediaP
     @Override
     protected void onResume() {
         super.onResume();
+        if(RacquetTouchOnce == 1)
+            setTitle("BallBounce Time");
         Log.d(TAG,"onresume");
     }
 
@@ -386,5 +388,6 @@ public class PlayVideo extends Activity implements SurfaceHolder.Callback,MediaP
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
 
